@@ -57,3 +57,43 @@ plt.show()
         - Analysts lean toward visualization tools.
         - Engineers toward cloud and big data platforms.
         - Scientists toward modeling and experimentation frameworks.
+
+## How are in-demand skills trending for Data Analysts?
+
+### Visualise Data
+
+``` python
+df_plot = df_DA_US_percent.iloc[:, :5]
+sns.lineplot(data=df_plot, dashes=False)
+sns.set_theme(style='ticks')
+sns.despine()
+
+plt.title('Trending Top Skills for Data Analysts in the US')
+plt.ylabel('Likelihood in Job Posting')
+plt.xlabel('2023')
+plt.legend().remove()
+
+from matplotlib.ticker import PercentFormatter
+ax = plt.gca()
+ax.yaxis.set_major_formatter(PercentFormatter(decimals=0))
+
+
+offsets = {
+    'tableau': 1.5,
+    'python': -1.5
+} # need to manually otherwise these labels overlap
+
+for i in range(5):
+    label = df_plot.columns[i]
+    y_pos = df_plot.iloc[-1, i] + offsets.get(label, 0)
+    plt.text(11.2, y_pos, label)
+
+```
+
+### Results
+
+![Trending Top Skills for Data Analysts in the US](3_Project/images/skills_trend_DA.png)
+
+### Insights
+
+SQL and Excel remain foundational skills for Data Analysts throughout 2023, with SQL consistently dominating job requirements. Tableau and Python show stable demand, while SAS continues a gradual decline. Overall, the data reflects a shift toward widely used analytical tools (SQL, Python, Tableau) and away from legacy platforms.
