@@ -4,11 +4,11 @@
 
 This analysis explores U.S. job postings to identify the most in-demand roles and the key skills employers are seeking. Using aggregated job posting data, I first determined the most frequently advertised positions, then examined the top five skills associated with each role.
 
-By comparing skill frequencies across popular roles such as Data Analyst and Data Scientist, the analysis highlights which technical competencies are most valued in today’s job market—most notably Python, SQL, and Excel. These insights provide a data-driven perspective on hiring trends, helping to pinpoint the core skills that consistently appear in high-demand positions.
+By comparing skill frequencies across popular roles such as Data Analyst and Data Scientist, the analysis highlights which technical competencies are most valued in today’s job market-most notably Python, SQL, and Excel. These insights provide a data-driven perspective on hiring trends, helping to pinpoint the core skills that consistently appear in high-demand positions.
 
 For detailed steps, you can view the notebook [here](3_Project/2_Skills_Demand.ipynb).
 
-### Visualise Data
+#### Visualise Data
 ```python
 fig, ax = plt.subplots(len(job_titles), 1)
 
@@ -40,13 +40,13 @@ plt.show()
 1. **SQL and Python dominate across all roles**
     - SQL appears in the top two skills for every role, confirming it as a universal requirement for data professionals.
 
-    - Python is equally strong — it’s the top skill for Data Scientists (72%) and a core skill for Data Engineers (65%).
+    - Python is equally strong, it’s the top skill for Data Scientists (72%) and a core skill for Data Engineers (65%).
 
 2. **Role-specific skill differences**
 
     - Data Analysts emphasize Excel and Tableau, reflecting a focus on reporting, visualization, and business-facing analytics.
 
-    - Data Engineers show strong demand for AWS, Azure, and Spark — pointing to a focus on cloud infrastructure and large-scale data pipelines.
+    - Data Engineers show strong demand for AWS, Azure, and Spark; pointing to a focus on cloud infrastructure and large-scale data pipelines.
 
     - Data Scientists rely more heavily on R, SAS, and Tableau, which align with statistical modeling and analytical visualization.
 
@@ -60,7 +60,7 @@ plt.show()
 
 ## How are in-demand skills trending for Data Analysts?
 
-### Visualise Data
+#### Visualise Data
 
 ``` python
 df_plot = df_DA_US_percent.iloc[:, :5]
@@ -97,3 +97,94 @@ for i in range(5):
 ### Insights
 
 SQL and Excel remain foundational skills for Data Analysts throughout 2023, with SQL consistently dominating job requirements. Tableau and Python show stable demand, while SAS continues a gradual decline. Overall, the data reflects a shift toward widely used analytical tools (SQL, Python, Tableau) and away from legacy platforms.
+
+
+## How well do Data Analysts jobs pay in comparison to other data roles?
+
+### Salary Analysis for Data Roles
+
+#### Visualise Data
+
+```python
+sns.boxplot(data=df_US_top_6, x='salary_year_avg', y='job_title_short', order= job_order)
+sns.set_theme(style='ticks')
+
+
+plt.title('Salary Distributions in the United States')
+plt.xlabel('Yearly Salary (USD)')
+plt.ylabel('')
+plt.xlim(0, 600000)
+ticks_x = plt.FuncFormatter(lambda y, pos: f'${int(y/1000)}K')
+plt.gca().xaxis.set_major_formatter(ticks_x)
+plt.show()
+
+```
+
+#### Results
+![Salary Distributions of Data Jobs in the US](3_Project/images/salary_distribution.png)
+*Box plot for salary distributions - top 6 data jobs titles*
+
+#### Insights
+
+- Senior roles (Data Scientist, Data Engineer) have the highest median salaries and the widest ranges, showing greater pay variability.
+
+- Entry-level roles like Data Analyst have lower and more consistent salary distributions.
+
+- Outliers across all roles suggest some professionals earn well above the typical range, likely due to location, experience, or company size.
+
+- The clear gap between analyst and engineering/science roles highlights the premium placed on technical and modeling expertise.
+
+Overall, the trend confirms a strong correlation between seniority and salary growth within data-related careers.
+
+
+## What skills in Data Analyst pay the most? And which ones are more popular in DA roles?
+
+### Highest Paid & Most Demanded Skills dor Data Analysts
+
+#### Visualise Data
+
+``` python
+
+fig, ax = plt.subplots(2, 1)
+
+sns.set_theme(style='ticks')
+
+# Top 10 Highest Paid Skills for Data Analysts
+sns.barplot(data=df_DA_top_pay, x='median', y=df_DA_top_pay.index, ax=ax[0], palette='flare_r')
+ax[0].legend().remove()
+
+ax[0].set_title('Top 10 Highest Paid Skills for Data Analysts')
+ax[0].set_ylabel('')
+ax[0].set_xlabel('')
+ax[0].xaxis.set_major_formatter(plt.FuncFormatter(lambda x, _: f'${int(x/1000)}K'))
+
+
+sns.barplot(data=df_DA_skills, x='median', y=df_DA_skills.index, ax=ax[1], palette='flare_r')
+ax[1].legend().remove()
+
+ax[1].set_title('Top 10 Most In-Demand Skills for Data Analysts')
+ax[1].set_ylabel('')
+ax[1].set_xlabel('')
+ax[1].set_xlabel('Median Salary (USD)')
+ax[1].set_xlim(ax[0].get_xlim())
+ax[1].xaxis.set_major_formatter(plt.FuncFormatter(lambda x, _: f'${int(x/1000)}K'))
+
+fig.tight_layout()
+
+```
+
+#### Results
+
+![Highest Paid & Most In-Demand Skills for Data Analysts in the US](3_Project/images/skills_salary.png)
+*Two separate bar graphs visualizing the highest-paid skills and most in-demand skills for data analysts in the US*
+
+#### Insights
+
+- The top-paid skills for data analysts, such as dplyr, bitbucket, and solidity, appear in only a handful of roles (fewer than six), suggesting these are niche, specialized skills that command a premium.
+
+- Many of these high-earning tools are linked to software development, engineering, or emerging tech fields like blockchain, highlighting the advantage of combining analytical expertise with technical depth.
+
+- In contrast, the most in-demand skills - Python, Tableau, SQL, and Excel - represent the core toolkit for data analysts. These are widely required across industries, offering job security and versatility, though with more standardized pay ranges.
+
+- Together, the charts show that while specialized skills can boost earning potential, broad analytical proficiency remains the foundation of a strong and sustainable data career.
+
