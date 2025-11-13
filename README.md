@@ -188,3 +188,79 @@ fig.tight_layout()
 
 - Together, the charts show that while specialized skills can boost earning potential, broad analytical proficiency remains the foundation of a strong and sustainable data career.
 
+
+## What is the modst optimal skill to learn for Data Analysts?
+
+#### Visualise Data
+
+``` python
+from adjustText import adjust_text
+
+sns.set_theme(style='ticks')
+
+sns.scatterplot(
+    data= df_high_demand_tech,
+    x='skill_percent',
+    y='median_salary',
+    hue='technology'
+)
+
+sns.despine()
+
+
+# Prepare texts for adjustText
+texts = []
+for i in range(len(df_high_demand_tech)):
+    texts.append(plt.text(
+        df_high_demand_tech['skill_percent'].iloc[i], 
+        df_high_demand_tech['median_salary'].iloc[i], 
+        df_high_demand_tech['skills'].iloc[i]
+                            
+    ))
+
+# Adjust text to avoid overlap
+adjust_text(texts, arrowprops=dict(arrowstyle='->', color='gray'))
+
+
+# Set axis labels, title, and legend
+plt.xlabel('Percent of Data Analyst Jobs')
+plt.ylabel('Median Yearly Salary')
+plt.title(f'Most Optimal Skills for Data Analysts in the US')
+plt.legend(title='Technology')
+
+from matplotlib.ticker import PercentFormatter
+ax = plt.gca()
+ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda y, pos: f'${int(y/1000)}K'))
+ax.xaxis.set_major_formatter(PercentFormatter(decimals=0))
+
+
+
+# Adjust layout and display plot 
+plt.tight_layout()
+plt.show()
+```
+
+#### Results
+
+![Most Optimal Skills for Data Analysts in the US](3_Project/5_Optimal_Skills.ipynb)
+*A scatter plot visualising the most optimal skills (high paying & high demand) for data analysts in the US*
+
+
+#### Insights
+
+**High Value, High Demand:**
+
+  - SQL dominates with nearly 60% job posting frequency and commands a strong $91K median salary, making it the most essential skill for data analysts
+  - Python offers the highest median salary at ~$97.5K while appearing in 33% of job postings - a premium skill worth learning
+
+**Specialization Pays:**
+
+- Cloud (Oracle) and database (SQL Server) skills offer salaries in the $92-97K range despite lower demand (6-7%), suggesting these are valuable niche specializations
+- Tableau balances strong salary ($93K) with solid demand (31%), making it a strategic analyst tool to master
+
+**High Demand, Lower Pay:**
+
+- Excel appears in 42% of job postings but offers a modest $84K salary - essential but commoditized
+- PowerPoint and Word show the lowest salaries ($85K, $81K), indicating they're baseline requirements rather than differentiators
+
+**Strategic Takeaway:** Focus on SQL as your foundation, add Python for salary premium, and consider Tableau or cloud technologies for competitive advantage.
