@@ -1,3 +1,29 @@
+# Overview
+This project analyzes the data analyst job market to identify which skills offer the best career opportunities. Using data from Luke Barousse's Python Course, I examine job postings to answer practical questions: Which skills are most in-demand? Which ones pay the most? And crucially - where do high demand and high salary intersect?
+
+Through Python-based analysis of job titles, salaries, locations, and required skills, this project provides data-driven insights for anyone looking to break into or advance in data analytics.
+
+# The Questions
+Below are the questions I want to answer in my project:
+
+- What are the skills most in demand for the top 3 most popular data roles?
+- How are in-demand skills trending for Data Analysts?
+- How well do jobs and skills pay for Data Analysts?
+- What are the optimal skills for data analysts to learn? (High Demand AND High Paying)
+
+# Tools & Technologies
+**Python** served as the primary analysis tool, with key libraries including:
+- Pandas for data manipulation and analysis
+Matplotlib and Seaborn for data visualization
+
+**Development Environment:**
+
+- **Jupyter Notebooks** for interactive analysis and documentation
+- **Visual Studio Code** for script development
+- **Git & GitHub** for version control and project sharing
+  
+
+
 # Analysis
 
 ## What are the most demanded skills for the top 3 most popular data roles?
